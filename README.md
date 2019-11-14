@@ -9,3 +9,7 @@
 
 ## Old Versions of this Project
 - [version-2018](https://github.com/FaztTech/nodejs-mysql-links/tree/version-2018)
+
+## Todo
+* [ ] Improve Links Routes
+* [ ] Write Route Validation with Express Validator
