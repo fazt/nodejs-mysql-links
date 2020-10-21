@@ -1,4 +1,6 @@
 # Notes App with Nodejs and Mysql
+Notes App is a Multi Page Application using Nodejs and Mysql. The purpose of this web application is just to be an example for beginners.
+
 ![](docs/screenshot2.png)
 ![](docs/screenshot.png)
 
@@ -7,9 +9,15 @@
 - src, it's all the code for the Backend and Frontend Application
 - docs
 
+## Environment Variables
+* PORT
+
 ## Old Versions of this Project
 - [version-2018](https://github.com/FaztTech/nodejs-mysql-links/tree/version-2018)
 
 ## Todo
 1. [x] Improve Links Routes
 1. [ ] Write Route Validation with Express Validator
+
+# Resources
+* https://stackoverflow.com/questions/50093144/mysql-8-0-client-does-not-support-authentication-protocol-requested-by-server

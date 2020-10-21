@@ -1,10 +1,11 @@
 {
   "name": "nodejs-mysql-notes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,17 +16,17 @@
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
-    "express-mysql-session": "^2.1.0",
-    "express-session": "^1.17.0",
-    "morgan": "^1.9.1",
-    "mysql": "^2.17.1",
-    "passport": "^0.4.0",
+    "express-handlebars": "^5.1.0",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "timeago.js": "^4.0.1"
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4",
-    "npm-check-updates": "^3.2.1"
+    "nodemon": "^2.0.6",
+    "npm-check-updates": "^9.1.2"
   }
 }

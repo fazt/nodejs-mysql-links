@@ -1,0 +1,35 @@
+version: "3.8"
+
+services: 
+  app:
+    image: node
+    container_name: linksweb
+    ports: 
+      - "4000:4000"
+    volumes: 
+      - .:/app
+    environment: 
+      - NODE_ENV=development
+      # - DATABASE_HOST=db
+      # - DATABASE_USER=fazt
+      # - DATABASE_PASSWORD=secret
+    env_file: ./.env
+    links: 
+      - db
+    
+  db:
+    env_file: ./.env
+    image: mysql:5.7
+    container_name: mysql
+    restart: unless-stopped
+    ports: 
+      - "3306:3306"
+    logging:
+      driver: none
+    environment: 
+      - MYSQL_DATABASE=dblinks
+      - MYSQL_USER="fazt"
+      - MYSQL_PASSWORD="secret"
+      - MYSQL_ROOT_PASSWORD="secret"
+
+

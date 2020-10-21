@@ -8,14 +8,14 @@ const flash = require('connect-flash');
 const MySQLStore = require('express-mysql-session')(session);
 const bodyParser = require('body-parser');
 
-const { database } = require('./keys');
+const { database, port } = require('./config');
 
 // Intializations
 const app = express();
 require('./lib/passport');
 
 // Settings
-app.set('port', process.env.PORT || 4000);
+app.set('port', port);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
   defaultLayout: 'main',
