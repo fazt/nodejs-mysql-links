@@ -16,8 +16,8 @@
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^5.1.0",
-    "express-mysql-session": "^2.1.4",
+    "express-handlebars": "^5.2.0",
+    "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
@@ -26,7 +26,6 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
-    "npm-check-updates": "^9.1.2"
+    "nodemon": "^2.0.6"
   }
 }
