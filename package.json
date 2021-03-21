@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "nodemon src/index.js --exec babel-node",
     "start": "node dist/index.js",
-    "build": "babel src -d dist",
+    "compile": "babel src -d dist",
     "clean": "rimraf dist",
-    "copyfiles": "ncp ./src/views ./dist/views && ncp ./src/public ./dist/public"
+    "copyfiles": "ncp ./src/views ./dist/views && ncp ./src/public ./dist/public",
+    "build": "npm run clean && npm run compile && npm run copyfiles"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,7 @@
     "connect-flash": "^0.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^5.2.0",
+    "express-handlebars": "^5.2.1",
     "express-mysql-session": "^2.1.5",
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
@@ -35,7 +36,7 @@
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.10",
     "ncp": "^2.0.0",
-    "nodemon": "^2.0.6",
+    "nodemon": "^2.0.7",
     "rimraf": "^3.0.2"
   }
 }

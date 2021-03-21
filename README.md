@@ -5,6 +5,14 @@ Notes App is a Multi Page Application using Nodejs and Mysql. The purpose of thi
 ![](docs/screenshot2.png)
 ![](docs/screenshot.png)
 
+### Installation
+```
+mysql -u MYUSR "-pMYPASSWORD" < ./database/db.sql # create database
+npm i
+npm run build
+npm start
+```
+
 ## File Structure
 
 - database, it the folder with all the sql queries, you can use to recreate the database for this application
@@ -23,12 +31,16 @@ Notes App is a Multi Page Application using Nodejs and Mysql. The purpose of thi
 
 1. [x] Improve Links Routes
 1. [ ] Write Route Validation with Express Validator
+1. [ ] Add docker compose production build
+1. [ ] Allows users to signup with email and no username
+1. [ ] Add nodemailer for transactional emails
 
 ## Tools
 
 - Nodejs
 - Mysql
-- MySQL Admin Chrome Extension [https://chrome.google.com/webstore/detail/chrome-mysql-admin/ndgnpnpakfcdjmpgmcaknimfgcldechn]
+- Babel
+- Docker
 
 # Resources
 
