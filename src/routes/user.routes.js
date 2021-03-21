@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from "express";
+import { isLoggedIn } from "../lib/auth";
+import { renderUserProfile } from "../controllers/user.controller";
 
-const { isLoggedIn } = require('../lib/auth');
-const { renderUserProfile } = require('../controllers/user.controller');
+const router = Router();
 
-router.get('/profile', isLoggedIn, renderUserProfile);
+router.get("/profile", isLoggedIn, renderUserProfile);
 
-module.exports = router;
+export default router;

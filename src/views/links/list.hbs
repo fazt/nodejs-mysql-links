@@ -2,9 +2,9 @@
     <div class="row">
         {{#each links}}
         <div class="col-md-3">
-            <div class="card text-center">
+            <div class="card text-center bg-dark text-light">
                 <div class="card-body">
-                    <a href="{{url}}" target="_blank">
+                    <a href="{{url}}" target="_blank" class="text-light">
                         <h3 class="card-title text-uppercase">
                             {{title}}
                         </h3>
@@ -24,9 +24,9 @@
         </div>
         {{else}}
         <div class="col-md-4 mx-auto">
-            <div class="card card-body text-center">
+            <div class="card card-body text-center bg-dark text-light">
                 <p>There are not Links saved yet.</p>
-                <a href="/links/add">Create One!</a>
+                <a href="/links/add" class="text-success">Create One!</a>
             </div>
         </div>
         {{/each}}

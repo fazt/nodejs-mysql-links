@@ -4,8 +4,11 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "nodemon src/index.js"
+    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node dist/index.js",
+    "build": "babel src -d dist",
+    "clean": "rimraf dist",
+    "copyfiles": "ncp ./src/views ./dist/views && ncp ./src/public ./dist/public"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +29,13 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "ncp": "^2.0.0",
+    "nodemon": "^2.0.6",
+    "rimraf": "^3.0.2"
   }
 }

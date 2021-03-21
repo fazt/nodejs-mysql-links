@@ -2,17 +2,20 @@
     <div class="row">
         <div class="col-md-4 mx-auto">
 
-            <div class="card">
+            <div class="card bg-dark">
                 <div class="card-body">
+                    <h1 class="text-light mb-3 h4">Create a New Task</h1>
                     <form action="/links/add" method="POST">
                         <div class="form-group">
-                            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+                            <input type="text" name="title" class="form-control bg-dark text-light" placeholder="Title"
+                                autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="url" name="url" class="form-control" placeholder="URL">
+                            <input type="url" name="url" class="form-control bg-dark text-light" placeholder="URL">
                         </div>
                         <div class="form-group">
-                            <textarea name="description" rows="2" class="form-control" placeholder="Description"></textarea>
+                            <textarea name="description" rows="2" class="form-control bg-dark text-light"
+                                placeholder="Description"></textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">

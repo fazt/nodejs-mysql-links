@@ -1,9 +1,9 @@
-CREATE DATABASE db_links;
+CREATE DATABASE dblinks;
 
-USE db_links;
+USE dblinks;
 
 -- TABLE USER
--- all pasword wil be encrypted using SHA1
+-- all pasword wil be encrypted using SHA2
 CREATE TABLE users (
   id INT(11) NOT NULL,
   username VARCHAR(16) NOT NULL,
