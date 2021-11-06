@@ -2,7 +2,7 @@ version: "3.8"
 
 services: 
   app:
-    image: node
+    image: node:14.18.1-alpine
     container_name: linksweb
     ports: 
       - "4000:4000"
@@ -13,12 +13,10 @@ services:
       # - DATABASE_HOST=db
       # - DATABASE_USER=fazt
       # - DATABASE_PASSWORD=secret
-    env_file: ./.env
     links: 
       - db
     
   db:
-    env_file: ./.env
     image: mysql:5.7
     container_name: mysql
     restart: unless-stopped
