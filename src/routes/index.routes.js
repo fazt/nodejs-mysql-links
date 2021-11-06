@@ -1,7 +1,7 @@
 import { Router } from "express";
 const router = Router();
 
-import { renderIndex } from "../controllers/index.conroller";
+import { renderIndex } from "../controllers/index.controller";
 
 router.get("/", renderIndex);
 
