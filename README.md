@@ -6,6 +6,7 @@ Notes App is a Multi Page Application using Nodejs and Mysql. The purpose of thi
 ![](docs/screenshot.png)
 
 ### Installation
+
 ```
 mysql -u MYUSR "-pMYPASSWORD" < ./database/db.sql # create database
 npm i

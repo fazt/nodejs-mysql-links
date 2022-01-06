@@ -1,8 +1,6 @@
-import mysql from "mysql";
+import mysql from "mysql2/promise";
 import { promisify } from "util";
-import config from "./config";
-
-const { database } = config;
+import { database } from "./config";
 
 const pool = mysql.createPool(database);
 
@@ -24,8 +22,5 @@ pool.getConnection((err, connection) => {
 
   return;
 });
-
-// Promisify Pool Querys
-pool.query = promisify(pool.query);
 
 export default pool;

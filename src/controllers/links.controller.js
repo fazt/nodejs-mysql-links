@@ -18,10 +18,10 @@ export const addLink = async (req, res) => {
 };
 
 export const renderLinks = async (req, res) => {
-  const links = await pool.query("SELECT * FROM links WHERE user_id = ?", [
+  const [rows] = await pool.query("SELECT * FROM links WHERE user_id = ?", [
     req.user.id,
   ]);
-  res.render("links/list", { links });
+  res.render("links/list", { links: rows });
 };
 
 export const deleteLink = async (req, res) => {
@@ -33,9 +33,8 @@ export const deleteLink = async (req, res) => {
 
 export const renderEditLink = async (req, res) => {
   const { id } = req.params;
-  const links = await pool.query("SELECT * FROM links WHERE id = ?", [id]);
-  console.log(links);
-  res.render("links/edit", { link: links[0] });
+  const [rows] = await pool.query("SELECT * FROM links WHERE id = ?", [id]);
+  res.render("links/edit", { link: rows[0] });
 };
 
 export const editLink = async (req, res) => {

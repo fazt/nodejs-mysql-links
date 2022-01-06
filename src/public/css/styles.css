@@ -2,6 +2,7 @@ body {
   background: #141518;
   font-family: "Oswald", sans-serif;
   overflow: hidden;
+  height: 100vh;
 }
 
 .index {

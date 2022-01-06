@@ -1,5 +1,3 @@
 import { format } from "timeago.js";
 
-export const timeago = (savedTimestamp) => {
-  return format(savedTimestamp);
-};
+export const timeago = (savedTimestamp) => format(savedTimestamp);
