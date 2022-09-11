@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isLoggedIn } from "../lib/auth";
+import { isLoggedIn } from "../lib/auth.js";
 import {
   renderAddLink,
   addLink,
@@ -7,7 +7,7 @@ import {
   deleteLink,
   editLink,
   renderEditLink,
-} from "../controllers/links.controller";
+} from "../controllers/links.controller.js";
 
 const router = Router();
 // Authorization

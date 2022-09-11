@@ -4,26 +4,35 @@ services:
   app:
     image: node
     container_name: linksweb
+    restart: on-failure:3
+    build: .
     ports:
       - "4000:4000"
-    volumes:
-      - .:/app
     environment:
       - NODE_ENV=development
-      # - DATABASE_HOST=db
-      # - DATABASE_USER=fazt
-      # - DATABASE_PASSWORD=secret
-    # links:
-    #   - db
+      - DATABASE_HOST=db
+      - DATABASE_USER=fazt
+      - DATABASE_PASSWORD=mypassword
+      - DATABASE_NAME=linksdb
+    volumes:
+      - .:/app
+    links:
+      - db
+    depends_on:
+      - db
+    command: bash -c "npm install && npm run dev"
   db:
-    image: mysql:5.7
-    container_name: mysql
+    image: mysql
+    container_name: linksdb
     ports:
       - "3306:3306"
-    logging:
-      driver: none
+    # logging:
+    #   driver: none
     environment:
-      - MYSQL_DATABASE=dblinks
-      - MYSQL_USER="fazt"
-      - MYSQL_PASSWORD="mypassword"
-      - MYSQL_ROOT_PASSWORD="mypassword"
+      - MYSQL_DATABASE=linksdb
+      - MYSQL_USER=fazt
+      - MYSQL_PASSWORD=mypassword
+      - MYSQL_ROOT_PASSWORD=mypassword
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql

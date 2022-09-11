@@ -1,44 +1,31 @@
 <div class="container p-4">
   <div class="row">
     <div class="col-md-4 mx-auto">
-      <form class="card" action="/signup" method="POST">
-        <div class="card-header">
-          <h3>SignUp</h3>
-        </div>
-        <div class="card-body">
-          <label for="fullname">Write your fullname:</label>
-          <input
-            type="type"
-            name="fullname"
-            placeholder="John Doe"
-            class="form-control mb-3"
-            autofocus
-          />
-          <label for="username">Write your Username:</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="johndoe123"
-            class="form-control mb-3"
-          />
+      <form class="card card-body bg-dark text-white p-5" action="/signup" method="POST">
+        <h3 class="text-center fw-bold mb-4">SignUp</h3>
 
-          <label for="password">Write your password:</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            class="form-control mb-3"
-          />
-          <button class="btn btn-success btn-block">
-            Register
-          </button>
-        </div>
-      </form>
+        <label for="fullname">Write your fullname:</label>
+        <input type="type" name="fullname" placeholder="John Doe" class="form-control mb-3" autofocus />
 
-      {{! Link }}
-      <p class="fs-5 text-center mt-3">Do you already have an account?
-        <a href="/signin">Signin</a>
-      </p>
+        <label for="username">Write your Email:</label>
+        <input type="email" name="email" placeholder="johndoe123" class="form-control mb-3" />
+
+        <label for="password">Write your password:</label>
+        <input type="password" name="password1" placeholder="Password" class="form-control mb-3" />
+
+        {{!-- Confirm your password --}}
+        <label for="password">Confirm your password:</label>
+        <input type="password" name="password2" placeholder="Password" class="form-control mb-3" />
+
+        <button class="btn btn-success btn-block">
+          Register
+        </button>
     </div>
+    </form>
+
+    {{! Link }}
+    <p class="fs-5 text-center text-white mt-3">Do you already have an account?
+      <a href="/signin" class="text-info">Signin</a>
+    </p>
   </div>
 </div>

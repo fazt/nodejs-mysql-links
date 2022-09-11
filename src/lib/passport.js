@@ -1,67 +1,34 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
-import pool from "../database";
-import * as helpers from "./helpers";
+import { pool } from "../database.js";
+import * as helpers from "./helpers.js";
 
 passport.use(
   "local.signin",
   new LocalStrategy(
     {
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password",
       passReqToCallback: true,
     },
-    async (req, username, password, done) => {
+    async (req, email, password, done) => {
       const [rows] = await pool.query(
-        "SELECT * FROM users WHERE username = ?",
-        [username]
+        "SELECT * FROM users WHERE email = ?",
+        [email]
       );
-      if (rows.length > 0) {
-        const user = rows[0];
-        const validPassword = await helpers.matchPassword(
-          password,
-          user.password
-        );
-        if (validPassword) {
-          done(null, user, req.flash("success", "Welcome " + user.username));
-        } else {
-          done(null, false, req.flash("message", "Incorrect Password"));
-        }
-      } else {
-        return done(
-          null,
-          false,
-          req.flash("message", "The Username does not exists.")
-        );
-      }
-    }
-  )
-);
 
-passport.use(
-  "local.signup",
-  new LocalStrategy(
-    {
-      usernameField: "username",
-      passwordField: "password",
-      passReqToCallback: true,
-    },
-    async (req, username, password, done) => {
-      const { fullname } = req.body;
+      if (!rows.length) return done(null, false, req.flash("error", "No user found"));
 
-      let newUser = {
-        fullname,
-        username,
+      const user = rows[0];
+      const validPassword = await helpers.matchPassword(
         password,
-      };
+        user.password
+      );
 
-      newUser.password = await helpers.encryptPassword(password);
+      if (!validPassword) return done(null, false, req.flash("error", "Incorrect Password"));
 
-      // Saving in the Database
-      const [result] = await pool.query("INSERT INTO users SET ? ", newUser);
-      newUser.id = result.insertId;
-      return done(null, newUser);
+      done(null, user, req.flash("success", "Welcome " + user.username));
     }
   )
 );

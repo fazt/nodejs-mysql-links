@@ -7,11 +7,13 @@ import {
   renderSignIn,
   signIn,
   logout,
-} from "../controllers/auth.controller";
+} from "../controllers/auth.controller.js";
+import { validator } from "../middlewares/validator.middleware.js";
+import { signupSchema } from "../validators/signup.validator.js";
 
 // SIGNUP
 router.get("/signup", renderSignUp);
-router.post("/signup", signUp);
+router.post("/signup", signupSchema, validator, signUp);
 
 // SINGIN
 router.get("/signin", renderSignIn);

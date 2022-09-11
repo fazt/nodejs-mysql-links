@@ -4,15 +4,21 @@ import path from "path";
 import { create } from "express-handlebars";
 import session from "express-session";
 import passport from "passport";
+import cookieParser from "cookie-parser";
 import flash from "connect-flash";
 import expressMySQLSession from "express-mysql-session";
-import { database, port } from "./config";
-import routes from "./routes";
-import "./lib/passport";
+import { fileURLToPath } from "url";
+
+import routes from "./routes/index.js";
+import { port } from "./config.js";
+import "./lib/passport.js";
+import * as helpers from "./lib/handlebars.js";
+import { pool } from "./database.js";
 
 // Intializations
-const MySQLStore = expressMySQLSession(session);
 const app = express();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const MySQLStore = expressMySQLSession(session);
 
 // Settings
 app.set("port", port);
@@ -24,7 +30,7 @@ app.engine(
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     extname: ".hbs",
-    helpers: require("./lib/handlebars"),
+    helpers
   }).engine
 );
 app.set("view engine", ".hbs");
@@ -33,13 +39,13 @@ app.set("view engine", ".hbs");
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use(cookieParser("faztmysqlnodemysql"));
 app.use(
   session({
     secret: "faztmysqlnodemysql",
     resave: false,
     saveUninitialized: false,
-    store: new MySQLStore(database),
+    store: new MySQLStore({}, pool),
   })
 );
 app.use(flash());
@@ -50,6 +56,8 @@ app.use(passport.session());
 app.use((req, res, next) => {
   app.locals.message = req.flash("message");
   app.locals.success = req.flash("success");
+  app.locals.error = req.flash("error");
+  app.locals.errors = req.flash("errors");
   app.locals.user = req.user;
   next();
 });

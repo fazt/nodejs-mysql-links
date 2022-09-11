@@ -2,32 +2,20 @@
   <div class="row">
 
     <div class="col-md-4 mx-auto">
-      <form action="/signin" method="POST" class="card card">
+      <form action="/signin" method="POST" class="card card bg-dark text-white p-4">
+
         <h3 class="text-center my-3">SignIn</h3>
-        <img
-          src="/img/logo.png"
-          alt="Logo Fazt"
-          class="card-img-top mx-auto m-2 rounded-circle w-50"
-        />
+
+        <img src="/img/logo.png" alt="Logo Fazt" class="card-img-top mx-auto m-2 rounded-circle w-50" />
         <div class="card-body">
 
-          <label for="username">Write a Username:</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            class="form-control mb-3"
-            autofocus
-          />
+          {{!-- Email --}}
+          <label for="username" class="fw-light fs-6 mb-2">Write a Email:</label>
+          <input type="text" name="email" placeholder="youremail@mail.com" class="form-control mb-3" autofocus />
 
           <label for="password">Write your Password:</label>
           <div class="form-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              class="form-control mb-3"
-            />
+            <input type="password" name="password" placeholder="Password" class="form-control mb-3" />
           </div>
           <button class="btn btn-primary btn-block">
             Login
@@ -37,8 +25,8 @@
       </form>
 
       {{! Link }}
-      <p class="fs-5 text-center mt-3">Don't have an Account?
-        <a href="/signup">Signup</a>
+      <p class="fs-5 text-center mt-3 text-light">Don't have an Account?
+        <a href="/signup" class="text-info">Signup</a>
       </p>
 
     </div>

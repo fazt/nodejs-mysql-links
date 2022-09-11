@@ -5,7 +5,17 @@ Notes App is a Multi Page Application using Nodejs and Mysql. The purpose of thi
 ![](docs/screenshot2.png)
 ![](docs/screenshot.png)
 
-### Installation
+### Installation with Docker (Recommended)
+
+```
+git clone https://github.com/FaztTech/nodejs-mysql-links
+cd nodejs-mysql-links
+docker-compose up
+```
+
+Now you can visit http://localhost:4000
+
+### Manual Installation
 
 ```
 mysql -u MYUSR "-pMYPASSWORD" < ./database/db.sql # create database
@@ -33,7 +43,6 @@ npm start
 1. [x] Improve Links Routes
 1. [ ] Write Route Validation with Express Validator
 1. [ ] Add docker compose production build
-1. [ ] Allows users to signup with email and no username
 1. [ ] Add nodemailer for transactional emails
 
 ## Tools
