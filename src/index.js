@@ -1,5 +1,6 @@
 import app from "./app.js";
+import {port} from './config.js'
 
 await import('./database.js');
-app.listen(app.get("port"));
-console.log("Server is in port", app.get("port"));
+app.listen(port);
+console.log("Server is in port", port);

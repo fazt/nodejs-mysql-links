@@ -21,7 +21,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MySQLStore = expressMySQLSession(session);
 
 // Settings
-app.set("port", port);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
