@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isLoggedIn } from "../lib/auth.js";
+import { isLoggedIn } from "../middlewares/isLoggedIn.js";
 import {
   renderAddLink,
   addLink,
@@ -10,6 +10,7 @@ import {
 } from "../controllers/links.controller.js";
 
 const router = Router();
+
 // Authorization
 router.use(isLoggedIn);
 

@@ -1,5 +1,5 @@
 import app from "./app.js";
-import {port} from './config.js'
+import { port } from './config.js'
 
 await import('./database.js');
 app.listen(port);

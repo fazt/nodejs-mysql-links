@@ -15,12 +15,10 @@ import "./lib/passport.js";
 import * as helpers from "./lib/handlebars.js";
 import { pool } from "./database.js";
 
-// Intializations
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const MySQLStore = expressMySQLSession(session);
 
-// Settings
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
@@ -34,7 +32,6 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 
-// Middlewares
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -51,7 +48,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Global variables
 app.use((req, res, next) => {
   app.locals.message = req.flash("message");
   app.locals.success = req.flash("success");
@@ -61,10 +57,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
 app.use(routes);
 
-// Public
 app.use(express.static(path.join(__dirname, "public")));
 
 export default app;
