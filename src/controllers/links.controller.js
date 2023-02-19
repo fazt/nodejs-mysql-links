@@ -1,8 +1,6 @@
 import { pool } from "../database.js";
 
-export const renderAddLink = (req, res) => {
-  res.render("links/add");
-};
+export const renderAddLink = (req, res) => res.render("links/add");
 
 export const addLink = async (req, res) => {
   const { title, url, description } = req.body;

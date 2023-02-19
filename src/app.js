@@ -10,7 +10,6 @@ import expressMySQLSession from "express-mysql-session";
 import { fileURLToPath } from "url";
 
 import routes from "./routes/index.js";
-import { port } from "./config.js";
 import "./lib/passport.js";
 import * as helpers from "./lib/handlebars.js";
 import { pool } from "./database.js";
@@ -49,7 +48,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  app.locals.message = req.flash("message");
   app.locals.success = req.flash("success");
   app.locals.error = req.flash("error");
   app.locals.errors = req.flash("errors");
@@ -60,5 +58,19 @@ app.use((req, res, next) => {
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500);
+  res.render("error", {
+    message: err.message,
+    status: err.status,
+  });
+});
 
 export default app;

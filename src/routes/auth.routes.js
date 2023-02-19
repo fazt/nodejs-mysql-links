@@ -9,15 +9,15 @@ import {
   logout,
 } from "../controllers/auth.controller.js";
 import { validator } from "../middlewares/validator.middleware.js";
-import { signupSchema } from "../validators/signup.validator.js";
+import { signinSchema, signupSchema } from "../schemas/auth.schema.js";
 
 // SIGNUP
 router.get("/signup", renderSignUp);
-router.post("/signup", signupSchema, validator, signUp);
+router.post("/signup", validator(signupSchema), signUp);
 
 // SINGIN
 router.get("/signin", renderSignIn);
-router.post("/signin", signIn);
+router.post("/signin", validator(signinSchema), signIn);
 
 router.get("/logout", logout);
 

@@ -1,3 +1,1 @@
-export const renderUserProfile = (req, res, next) => {
-  res.render("profile");
-};
+export const renderUserProfile = (req, res) => res.render("profile");

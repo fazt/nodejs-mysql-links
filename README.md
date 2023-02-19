@@ -40,8 +40,6 @@ npm start
 
 ## Todo
 
-1. [x] Improve Links Routes
-1. [ ] Write Route Validation with Express Validator
 1. [ ] Add docker compose production build
 1. [ ] Add nodemailer for transactional emails
 

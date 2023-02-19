@@ -1,10 +1,10 @@
 import { Router } from "express";
+import { renderIndex, ping } from "../controllers/index.controller.js";
+import { isNotLoggedIn } from "../middlewares/protectedRoutes.js";
+
 const router = Router();
 
-import { renderIndex, ping } from "../controllers/index.controller.js";
-
-router.get("/", renderIndex);
-
-router.get('/ping', ping);
+router.get("/", isNotLoggedIn, renderIndex);
+router.get("/ping", ping);
 
 export default router;

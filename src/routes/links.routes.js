@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { isLoggedIn } from "../middlewares/isLoggedIn.js";
+import { isLoggedIn } from "../middlewares/protectedRoutes.js";
+import { validator } from "../middlewares/validator.middleware.js";
 import {
   renderAddLink,
   addLink,
@@ -8,18 +9,16 @@ import {
   editLink,
   renderEditLink,
 } from "../controllers/links.controller.js";
+import { createLinkSchema } from "../schemas/task.schema.js";
 
 const router = Router();
 
-// Authorization
-router.use(isLoggedIn);
-
 // Routes
-router.get("/add", renderAddLink);
-router.post("/add", addLink);
 router.get("/", isLoggedIn, renderLinks);
-router.get("/delete/:id", deleteLink);
-router.get("/edit/:id", renderEditLink);
-router.post("/edit/:id", editLink);
+router.get("/add", isLoggedIn, renderAddLink);
+router.post("/add", isLoggedIn, validator(createLinkSchema), addLink);
+router.get("/delete/:id", isLoggedIn, deleteLink);
+router.get("/edit/:id", isLoggedIn, renderEditLink);
+router.post("/edit/:id", isLoggedIn, editLink);
 
 export default router;

@@ -1,10 +1,10 @@
-import { validationResult } from 'express-validator';
-
-export const validator = (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        req.flash('errors', errors.array().map(error => error.msg));
-        return res.status(400).redirect(req.originalUrl);
-    }
-    next();
-}
+export const validator = (schema) => (req, res, next) => {
+  const { body } = req;
+  const { error } = schema.safeParse(body);
+  if (error) {
+    const errors = error.errors.map((error) => error.message);
+    req.flash("error", errors);
+    return res.status(400).redirect(req.originalUrl);
+  }
+  return next();
+};

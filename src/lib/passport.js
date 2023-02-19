@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
 import { pool } from "../database.js";
-import * as helpers from "./helpers.js";
+import { matchPassword } from "./helpers.js";
 
 passport.use(
   "local.signin",
@@ -13,22 +13,23 @@ passport.use(
       passReqToCallback: true,
     },
     async (req, email, password, done) => {
-      const [rows] = await pool.query(
-        "SELECT * FROM users WHERE email = ?",
-        [email]
-      );
+      const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [
+        email,
+      ]);
 
-      if (!rows.length) return done(null, false, req.flash("error", "No user found"));
+      if (!rows.length)
+        return done(null, false, req.flash("error", "No user found"));
 
       const user = rows[0];
-      const validPassword = await helpers.matchPassword(
-        password,
-        user.password
-      );
+      const validPassword = await matchPassword(password, user.password);
+      console.log(validPassword);
 
-      if (!validPassword) return done(null, false, req.flash("error", "Incorrect Password"));
+      if (!validPassword) {
+        req.flash("error", "Incorrect Password");
+        return done(null, false);
+      }
 
-      done(null, user, req.flash("success", "Welcome " + user.username));
+      done(null, user);
     }
   )
 );
