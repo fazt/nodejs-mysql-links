@@ -1,6 +1,4 @@
 import { Router } from "express";
-const router = Router();
-
 import {
   renderSignUp,
   signUp,
@@ -10,6 +8,8 @@ import {
 } from "../controllers/auth.controller.js";
 import { validator } from "../middlewares/validator.middleware.js";
 import { signinSchema, signupSchema } from "../schemas/auth.schema.js";
+
+const router = Router();
 
 // SIGNUP
 router.get("/signup", renderSignUp);

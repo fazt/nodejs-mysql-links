@@ -22,7 +22,6 @@ passport.use(
 
       const user = rows[0];
       const validPassword = await matchPassword(password, user.password);
-      console.log(validPassword);
 
       if (!validPassword) {
         req.flash("error", "Incorrect Password");

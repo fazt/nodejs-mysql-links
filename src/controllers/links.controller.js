@@ -4,13 +4,14 @@ export const renderAddLink = (req, res) => res.render("links/add");
 
 export const addLink = async (req, res) => {
   const { title, url, description } = req.body;
-  const newLink = {
-    title,
-    url,
-    description,
-    user_id: req.user.id,
-  };
-  await pool.query("INSERT INTO links set ?", [newLink]);
+  await pool.query("INSERT INTO links set ?", [
+    {
+      title,
+      url,
+      description,
+      user_id: req.user.id,
+    },
+  ]);
   req.flash("success", "Link Saved Successfully");
   res.redirect("/links");
 };
