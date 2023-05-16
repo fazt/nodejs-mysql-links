@@ -12,7 +12,7 @@ export const addLink = async (req, res) => {
       user_id: req.user.id,
     },
   ]);
-  req.flash("success", "Link Saved Successfully");
+  await req.setFlash("success", "Link Saved Successfully");
   res.redirect("/links");
 };
 
@@ -26,8 +26,8 @@ export const renderLinks = async (req, res) => {
 export const deleteLink = async (req, res) => {
   const { id } = req.params;
   await pool.query("DELETE FROM links WHERE ID = ?", [id]);
-  req.flash("success", "Link Removed Successfully");
-  res.redirect("/links");
+  await req.setFlash("success", `Link ${id} Removed Successfully`);
+  return res.redirect("/links");
 };
 
 export const renderEditLink = async (req, res) => {
@@ -45,6 +45,6 @@ export const editLink = async (req, res) => {
     url,
   };
   await pool.query("UPDATE links set ? WHERE id = ?", [newLink, id]);
-  req.flash("success", "Link Updated Successfully");
+  await req.setFlash("success", "Link Updated Successfully");
   res.redirect("/links");
 };

@@ -17,14 +17,16 @@ passport.use(
         email,
       ]);
 
-      if (!rows.length)
-        return done(null, false, req.flash("error", "No user found"));
+      if (!rows.length) {
+        await req.setFlash("error", "No user found");
+        return done(null, false);
+      }
 
       const user = rows[0];
       const validPassword = await matchPassword(password, user.password);
 
       if (!validPassword) {
-        req.flash("error", "Incorrect Password");
+        await req.setFlash("error", "Incorrect Password");
         return done(null, false);
       }
 

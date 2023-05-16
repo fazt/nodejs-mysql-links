@@ -2,16 +2,19 @@ import express from "express";
 import morgan from "morgan";
 import path from "path";
 import { create } from "express-handlebars";
-import session from "express-session";
 import passport from "passport";
 import cookieParser from "cookie-parser";
 import flash from "connect-flash";
+import session from "express-session";
 import expressMySQLSession from "express-mysql-session";
+import { promiseConnectFlash } from "async-connect-flash";
+
 import { fileURLToPath } from "url";
 
 import routes from "./routes/index.js";
 import "./lib/passport.js";
 import * as helpers from "./lib/handlebars.js";
+import { SECRET, database } from "./config.js";
 import { pool } from "./database.js";
 
 const app = express();
@@ -26,7 +29,7 @@ app.engine(
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     extname: ".hbs",
-    helpers
+    helpers,
   }).engine
 );
 app.set("view engine", ".hbs");
@@ -35,29 +38,29 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser("faztmysqlnodemysql"));
+console.log(database);
 app.use(
   session({
-    secret: "faztmysqlnodemysql",
+    secret: SECRET,
     resave: false,
     saveUninitialized: false,
     store: new MySQLStore({}, pool),
   })
 );
-app.use(flash());
+app.use(promiseConnectFlash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  app.locals.success = req.flash("success");
-  app.locals.error = req.flash("error");
-  app.locals.errors = req.flash("errors");
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(async (req, res, next) => {
+  app.locals.success = await req.getFlash("success");
+  app.locals.error = await req.getFlash("error");
   app.locals.user = req.user;
   next();
 });
 
 app.use(routes);
-
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
   const err = new Error("Not Found");
@@ -66,6 +69,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  console.log("Error", err);
   res.status(err.status || 500);
   res.render("error", {
     message: err.message,

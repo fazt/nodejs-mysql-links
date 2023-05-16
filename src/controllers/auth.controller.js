@@ -31,12 +31,14 @@ export const signUp = async (req, res, next) => {
   );
 };
 
-export const renderSignIn = (req, res) => res.render("auth/signin");
+export const renderSignIn = (req, res) => {
+  res.render("auth/signin");
+};
 
 export const signIn = passport.authenticate("local.signin", {
   successRedirect: "/links",
   failureRedirect: "/signin",
-  failureMessage: true,
+  passReqToCallback: true,
   failureFlash: true,
 });
 

@@ -13,7 +13,6 @@ import { createLinkSchema } from "../schemas/task.schema.js";
 
 const router = Router();
 
-// Routes
 router.get("/", isLoggedIn, renderLinks);
 router.get("/add", isLoggedIn, renderAddLink);
 router.post("/add", isLoggedIn, validator(createLinkSchema), addLink);

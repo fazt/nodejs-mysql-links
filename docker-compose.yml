@@ -1,31 +1,31 @@
 version: "3.8"
 
 services:
-  app:
-    image: node
-    container_name: linksweb
-    restart: on-failure:3
-    build: .
-    ports:
-      - "4000:4000"
-    environment:
-      - NODE_ENV=development
-      - DATABASE_HOST=db
-      - DATABASE_USER=fazt
-      - DATABASE_PASSWORD=mypassword
-      - DATABASE_NAME=linksdb
-    volumes:
-      - .:/app
-    links:
-      - db
-    depends_on:
-      - db
-    command: bash -c "npm install && npm run dev"
+  # app:
+  #   image: node
+  #   container_name: linksweb
+  #   restart: on-failure:3
+  #   build: .
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     - NODE_ENV=development
+  #     - DATABASE_HOST=db
+  #     - DATABASE_USER=fazt
+  #     - DATABASE_PASSWORD=mypassword
+  #     - DATABASE_NAME=linksdb
+  #   volumes:
+  #     - .:/app
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
+  #   command: bash -c "npm install && npm run dev"
   db:
     image: mysql
     container_name: linksdb
     ports:
-      - "3306:3306"
+      - 3306:3306
     # logging:
     #   driver: none
     environment:
